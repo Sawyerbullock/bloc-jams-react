@@ -20,16 +20,6 @@ class Album extends Component {
     this.audioElement.src = album.songs[0].audioSrc;
   }
 
-  mouseEnter() {
-    console.log("mouse entered")
-    this.setState({ isMouseInside: true });
-  }
-
-  mouseLeave() {
-    console.log("mouse left")
-    this.setState({ isMouseInside: false });
-  }
-
   play() {
     this.audioElement.play();
     this.setState({ isPlaying: true });
@@ -74,7 +64,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-                <Song className="song" key={index} index={index} title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter()} onMouseLeave={() => this.mouseLeave()} />
+                <Song className="song" key={index} index={index} title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} />
               )
             }
           </tbody>
