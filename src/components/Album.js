@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
+import Song from './Song';
 
 class Album extends Component {
   constructor(props) {
@@ -12,11 +13,21 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      isPlaying: false
+      isPlaying: false,
     };
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+  }
+
+  mouseEnter() {
+    console.log("mouse entered")
+    this.setState({ isMouseInside: true });
+  }
+
+  mouseLeave() {
+    console.log("mouse left")
+    this.setState({ isMouseInside: false });
   }
 
   play() {
@@ -63,11 +74,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-                <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                  <td>{index + 1}</td>
-                  <td>{song.title}</td>
-                  <td>{song.duration}</td>
-                </tr>
+                <Song className="song" key={index} index={ song.index } title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter()} onMouseLeave={() => this.mouseLeave()} />
               )
             }
           </tbody>
