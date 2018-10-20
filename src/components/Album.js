@@ -74,7 +74,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-                <Song className="song" key={index} index={ song.index } title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter()} onMouseLeave={() => this.mouseLeave()} />
+                <Song className="song" key={index} index={index} title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter()} onMouseLeave={() => this.mouseLeave()} />
               )
             }
           </tbody>
