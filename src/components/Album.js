@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
-import Song from './Song';
 
 class Album extends Component {
   constructor(props) {
@@ -12,8 +11,9 @@ class Album extends Component {
 
     this.state = {
       album: album,
-      currentSong: album.songs[0],
+      currentSong: false,
       isPlaying: false,
+      isMouseInside: false,
     };
 
     this.audioElement = document.createElement('audio');
@@ -45,21 +45,30 @@ class Album extends Component {
     }
   }
 
-  firstColumn() {
-    if (this.state.isMouseInside && !this.state.isPlaying) {
+  mouseEnter(index) {
+    console.log(index);
+    this.setState({ isMouseInside: index });
+  }
+
+  mouseLeave(index) {
+    this.setState({ isMouseInside: false });
+  }
+
+  firstColumn(song, index) {
+    if (this.state.isMouseInside === index) {
       return (
         <span className="ion-md-play"></span>
       );
-    } else if (this.state.isSelected && !this.state.isPlaying) {
-      return(
-        <span className="ion-md-play"></span>
-      );
-    } else if (this.state.isSelected && this.state.isPlaying) {
-      return(
-        <span className="ion-md-pause"></span>
-      );
+    } else if ( this.state.currentSong === song && this.state.isPlaying ) {
+        return (
+          <span className="ion-md-pause"></span>
+        );
+    } else if ( this.state.currentSong === song && !this.state.isPlaying) {
+        return (
+          <span className="ion-md-play"></span>
+        );
     } else {
-      return(this.props.index + 1);
+      return(index + 1);
     }
   }
 
@@ -82,8 +91,8 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-                <tr className="song" key={song.titel} onClick={() => this.handleSongClick(song)} >
-                  <td>{index + 1}</td>
+                <tr className="song" key={song.title} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter(index)} onMouseLeave={() => this.mouseLeave(index)} >
+                  <td>{this.firstColumn(song, index)}</td>
                   <td>{song.title}</td>
                   <td>{song.duration}</td>
                 </tr>
