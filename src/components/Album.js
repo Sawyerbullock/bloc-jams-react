@@ -45,6 +45,24 @@ class Album extends Component {
     }
   }
 
+  firstColumn() {
+    if (this.state.isMouseInside && !this.state.isPlaying) {
+      return (
+        <span className="ion-md-play"></span>
+      );
+    } else if (this.state.isSelected && !this.state.isPlaying) {
+      return(
+        <span className="ion-md-play"></span>
+      );
+    } else if (this.state.isSelected && this.state.isPlaying) {
+      return(
+        <span className="ion-md-pause"></span>
+      );
+    } else {
+      return(this.props.index + 1);
+    }
+  }
+
   render() {
     return (
       <section className="album">
@@ -64,7 +82,11 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-                <Song className="song" key={index} index={index} title={ song.title } duration={ song.duration } onClick={() => this.handleSongClick(song)} />
+                <tr className="song" key={song.titel} onClick={() => this.handleSongClick(song)} >
+                  <td>{index + 1}</td>
+                  <td>{song.title}</td>
+                  <td>{song.duration}</td>
+                </tr>
               )
             }
           </tbody>
