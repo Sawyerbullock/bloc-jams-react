@@ -96,7 +96,7 @@ class Album extends Component {
   }
 
   handleVolumeChange(e) {
-    const newVolume = this.audioElement.volume * e.target.value;
+    const newVolume = e.target.value;
     this.audioElement.volume = newVolume;
     this.setState({ volume: newVolume });
   }
@@ -107,6 +107,14 @@ class Album extends Component {
 
   mouseLeave(index) {
     this.setState({ isMouseInside: false });
+  }
+
+  formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time - minutes * 60);
+    return (
+      String("00000" + minutes).slice(-2)+":"+String("00000" + seconds).slice(-2) || "-:--"
+    ) ;
   }
 
   firstColumn(song, index) {
@@ -149,7 +157,7 @@ class Album extends Component {
                 <tr className="song" key={song.title} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseEnter(index)} onMouseLeave={() => this.mouseLeave(index)} >
                   <td>{this.firstColumn(song, index)}</td>
                   <td>{song.title}</td>
-                  <td>{song.duration}</td>
+                  <td>{this.formatTime(song.duration)}</td>
                 </tr>
               )
             }
@@ -166,6 +174,7 @@ class Album extends Component {
           handleSkipClick={() => this.handleSkipClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          formatTime={(time) => this.formatTime(time)} 
         />
       </section>
     );
