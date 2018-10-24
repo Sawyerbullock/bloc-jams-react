@@ -45,7 +45,7 @@ class Album extends Component {
     this.audioElement.src = null;
     this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
     this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
-    this.audioElement.removeEventLIstener('volumechange', this.eventListeners.volumechange);
+    this.audioElement.removeEventListener('volumechange', this.eventListeners.volumechange);
   }
 
   play() {
@@ -174,7 +174,7 @@ class Album extends Component {
           handleSkipClick={() => this.handleSkipClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
-          formatTime={(time) => this.formatTime(time)} 
+          formatTime={(time) => this.formatTime(time)}
         />
       </section>
     );
