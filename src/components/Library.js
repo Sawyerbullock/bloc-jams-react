@@ -10,11 +10,16 @@ class Library extends Component {
 
   render() {
     return (
-      <section className="library">
+      <section className="row navbar library">
         {
           this.state.albums.map( (album, index) =>
-            <Link to={`/album/${album.slug}`} key={index}>
-              <img src={album.albumCover} alt={album.title} />
+            <Link to={`/album/${album.slug}`} className="col-md-6 album-link" key={index}>
+              <div className="view overlay zoom">
+                <img src={album.albumCover} className="img-fluid" alt={album.title} />
+                <div className="mask flex-center">
+                  <p class="white-text">{album.title}</p>
+                </div>
+              </div>
               <div>{album.title}</div>
               <div>{album.artist}</div>
               <div>{album.songs.length} songs</div>
