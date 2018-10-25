@@ -17,7 +17,7 @@ class Library extends Component {
               <div className="view overlay zoom">
                 <img src={album.albumCover} className="img-fluid" alt={album.title} />
                 <div className="mask flex-center">
-                  <p class="white-text">{album.title}</p>
+                  <p className="white-text">{album.title}</p>
                 </div>
               </div>
               <div>{album.title}</div>
