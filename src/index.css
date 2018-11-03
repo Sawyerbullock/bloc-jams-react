@@ -60,6 +60,10 @@ body {
   text-decoration: underline;
 }
 
+.selling-points {
+  color: #E93671;
+}
+
 #hero-content {
   background-image: url("blurred_backgrounds/concert-1.jpg");
   background-attachment: fixed;
